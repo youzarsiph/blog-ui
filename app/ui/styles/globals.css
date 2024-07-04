@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply font-fira transition-all duration-300 prose-headings:font-display prose-code:font-code;
+  }
+}
