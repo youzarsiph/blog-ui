@@ -1,5 +1,6 @@
 'use client'
 
+import { getAuthToken } from '@/app/actions'
 import { Response, Article as TArticle } from '@/app/types'
 import { Article } from '@/app/ui/components'
 import { API } from '@/app/utils'
@@ -12,7 +13,10 @@ const Page = () => {
 
   React.useEffect(() => {
     ;(async () => {
+      const cookie = await getAuthToken()
+
       await API.articles.search(
+        cookie,
         query,
         (data: Response<TArticle>) => setArticles(data.results),
         (error) => console.log(error),

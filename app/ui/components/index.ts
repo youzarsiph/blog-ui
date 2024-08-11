@@ -10,9 +10,9 @@ import Dropdown from '@/app/ui/components/Dropdown'
 import Editor from '@/app/ui/components/Editor'
 import Header from '@/app/ui/components/Header'
 import Footer from '@/app/ui/components/Footer'
-import Invite from '@/app/ui/components/Invite'
 import Input from '@/app/ui/components/Input'
 import Listbox from '@/app/ui/components/Listbox'
+import Message from '@/app/ui/components/Message'
 import Modal from '@/app/ui/components/Modal'
 import Select from '@/app/ui/components/Select'
 import Switch from '@/app/ui/components/Switch'
@@ -28,9 +28,9 @@ export {
   Editor,
   Header,
   Footer,
-  Invite,
   Input,
   Listbox,
+  Message,
   Modal,
   Select,
   Switch,

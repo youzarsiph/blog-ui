@@ -6,6 +6,7 @@ type User = {
   photo: string | undefined
   cover: string | undefined
   username: string
+  email: string
   first_name: string
   last_name: string
   bio: string | undefined
@@ -20,7 +21,11 @@ type UserRequiredFields = Omit<
   User,
   | 'id'
   | 'url'
-  | 'image'
+  | 'photo'
+  | 'cover'
+  | 'first_name'
+  | 'last_name'
+  | 'bio'
   | 'article_count'
   | 'follower_count'
   | 'date_joined'

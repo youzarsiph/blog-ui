@@ -90,7 +90,13 @@ const Utils = {
     await fetch(url, {
       method: 'POST',
       body: JSON.stringify(data),
-      headers: Utils.headers(token),
+      headers:
+        token === ''
+          ? {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            }
+          : Utils.headers(token),
     })
       .then((response) => Utils.handleResponse(response))
       .then((data) => callback(data))
@@ -198,13 +204,14 @@ const Articles = {
    * @returns Promise
    */
   create: async (
+    token: string,
     article: ArticleRequiredFields,
     callback: (data: any) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.post(
       `${process.env.NEXT_PUBLIC_API_URL}/articles`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       article,
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
@@ -218,13 +225,14 @@ const Articles = {
    * @returns Promise
    */
   delete: async (
+    token: string,
     id: number,
     callback: (data: any) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.delete(
       `${process.env.NEXT_PUBLIC_API_URL}/articles/${id}`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -237,13 +245,14 @@ const Articles = {
    * @returns Promise
    */
   get: async (
+    token: string,
     id: number,
     callback: (data: Article) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/articles/${id}`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: Article) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -255,12 +264,14 @@ const Articles = {
    * @returns Promise
    */
   list: async (
+    token: string,
     callback: (data: TResponse<Article>) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/articles?ordering=-created_at`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
+      // token,
       (data: TResponse<Article>) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -274,6 +285,7 @@ const Articles = {
    * @returns Promise
    */
   update: async (
+    token: string,
     id: number,
     article: ArticleRequiredFields,
     callback: (data: any) => void,
@@ -281,7 +293,7 @@ const Articles = {
   ) =>
     await Utils.put(
       `${process.env.NEXT_PUBLIC_API_URL}/articles/${id}`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       article,
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
@@ -295,13 +307,14 @@ const Articles = {
    * @returns Promise
    */
   star: async (
+    token: string,
     id: number,
     callback: (data: any) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.post(
       `${process.env.NEXT_PUBLIC_API_URL}/articles/${id}/star`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       {},
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
@@ -315,13 +328,14 @@ const Articles = {
    * @returns Promise
    */
   comments: async (
+    token: string,
     id: number,
     callback: (data: TResponse<Comment>) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/articles/${id}/comments`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: TResponse<Comment>) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -335,6 +349,7 @@ const Articles = {
    * @returns Promise
    */
   qa: async (
+    token: string,
     id: number,
     question: string,
     callback: (data: any) => void,
@@ -342,7 +357,7 @@ const Articles = {
   ) =>
     await Utils.post(
       `${process.env.NEXT_PUBLIC_API_URL}/articles/${id}/qa`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       { question: question },
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
@@ -357,14 +372,15 @@ const Articles = {
    * @returns Promise
    */
   react: async (
+    token: string,
     id: number,
-    emoji: Emoji,
+    emoji: { emoji: Emoji },
     callback: (data: any) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.post(
       `${process.env.NEXT_PUBLIC_API_URL}/articles/${id}/react`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       { emoji: emoji },
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
@@ -378,13 +394,14 @@ const Articles = {
    * @returns Promise
    */
   reactions: async (
+    token: string,
     id: number,
     callback: (data: TResponse<Reaction>) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/articles/${id}/reactions`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: TResponse<Reaction>) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -397,13 +414,14 @@ const Articles = {
    * @returns Promise
    */
   recommendations: async (
+    token: string,
     id: number,
     callback: (data: TResponse<Article>) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/articles/${id}/recommendations`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: TResponse<Article>) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -416,13 +434,14 @@ const Articles = {
    * @returns Promise
    */
   summary: async (
+    token: string,
     id: number,
     callback: (data: any) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.post(
       `${process.env.NEXT_PUBLIC_API_URL}/articles/${id}/summary`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       {},
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
@@ -436,13 +455,14 @@ const Articles = {
    * @returns Promise
    */
   tags: async (
+    token: string,
     id: number,
     callback: (data: any) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/articles/${id}/tags`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -455,13 +475,14 @@ const Articles = {
    * @returns Promise
    */
   translation: async (
+    token: string,
     id: number,
     callback: (data: any) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.post(
       `${process.env.NEXT_PUBLIC_API_URL}/articles/${id}/translation`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       {},
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
@@ -474,12 +495,13 @@ const Articles = {
    * @returns Promise
    */
   explore: async (
+    token: string,
     callback: (data: TResponse<Article>) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/articles/explore`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: TResponse<Article>) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -491,12 +513,13 @@ const Articles = {
    * @returns Promise
    */
   feed: async (
+    token: string,
     callback: (data: TResponse<Article>) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/articles/feed`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: TResponse<Article>) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -509,13 +532,14 @@ const Articles = {
    * @returns
    */
   generate: async (
+    token: string,
     prompt: string,
     callback: (data: any) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.post(
       `${process.env.NEXT_PUBLIC_API_URL}/articles/generate`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       { prompt: prompt },
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
@@ -528,12 +552,13 @@ const Articles = {
    * @returns Promise
    */
   starred: async (
+    token: string,
     callback: (data: TResponse<Article>) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/articles/starred`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: TResponse<Article>) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -546,13 +571,14 @@ const Articles = {
    * @returns Promise
    */
   search: async (
+    token: string,
     query: string,
     callback: (data: TResponse<Article>) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/articles?${Utils.toUrlSearchParams({ search: query, ordering: '-created_at' })}`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: TResponse<Article>) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -565,13 +591,14 @@ const Articles = {
    * @returns Promise
    */
   filter: async (
+    token: string,
     params: ArticleFilters,
     callback: (data: TResponse<Article>) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/articles?${Utils.toUrlSearchParams(params)}`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: TResponse<Article>) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -590,6 +617,7 @@ const Comments = {
    * @returns Promise
    */
   create: async (
+    token: string,
     id: number,
     comment: CommentRequiredFields,
     callback: (data: any) => void,
@@ -597,7 +625,7 @@ const Comments = {
   ) =>
     await Utils.post(
       `${process.env.NEXT_PUBLIC_API_URL}/articles/${id}/comments/`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       comment,
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
@@ -611,13 +639,14 @@ const Comments = {
    * @returns Promise
    */
   delete: async (
+    token: string,
     id: number,
     callback: (data: any) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.delete(
       `${process.env.NEXT_PUBLIC_API_URL}/comments/${id}`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -630,13 +659,14 @@ const Comments = {
    * @returns Promise
    */
   get: async (
+    token: string,
     id: number,
     callback: (data: Comment) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/comments/${id}`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: Comment) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -648,12 +678,13 @@ const Comments = {
    * @returns Promise
    */
   list: async (
+    token: string,
     callback: (data: TResponse<Comment>) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/comments`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: TResponse<Comment>) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -667,6 +698,7 @@ const Comments = {
    * @returns Promise
    */
   update: async (
+    token: string,
     id: number,
     comment: CommentRequiredFields,
     callback: (data: any) => void,
@@ -674,7 +706,7 @@ const Comments = {
   ) =>
     await Utils.put(
       `${process.env.NEXT_PUBLIC_API_URL}/comments/${id}`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       comment,
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
@@ -689,6 +721,7 @@ const Comments = {
    * @returns Promise
    */
   reply: async (
+    token: string,
     id: number,
     comment: CommentRequiredFields,
     callback: (data: any) => void,
@@ -696,7 +729,7 @@ const Comments = {
   ) =>
     await Utils.post(
       `${process.env.NEXT_PUBLIC_API_URL}/comments/${id}/replies/`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       comment,
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
@@ -710,13 +743,14 @@ const Comments = {
    * @returns Promise
    */
   replies: async (
+    token: string,
     id: number,
     callback: (data: TResponse<Comment>) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/comments/${id}/replies/`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: TResponse<Comment>) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -729,13 +763,14 @@ const Comments = {
    * @returns Promise
    */
   sentimentAnalysis: async (
+    token: string,
     id: number,
     callback: (data: any) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.post(
       `${process.env.NEXT_PUBLIC_API_URL}/comments/${id}/sentiment-analysis`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       {},
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
@@ -749,13 +784,14 @@ const Comments = {
    * @returns Promise
    */
   summary: async (
+    token: string,
     id: number,
     callback: (data: any) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.post(
       `${process.env.NEXT_PUBLIC_API_URL}/comments/${id}/summary`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       {},
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
@@ -769,13 +805,14 @@ const Comments = {
    * @returns Promise
    */
   translation: async (
+    token: string,
     id: number,
     callback: (data: any) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.post(
       `${process.env.NEXT_PUBLIC_API_URL}/comments/${id}/translation`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       {},
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
@@ -790,6 +827,7 @@ const Comments = {
    * @returns Promise
    */
   search: async (
+    token: string,
     id: number,
     query: string,
     callback: (data: TResponse<Comment>) => void,
@@ -797,7 +835,7 @@ const Comments = {
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/articles/${id}/comments/?${Utils.toUrlSearchParams({ search: query })}`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: TResponse<Comment>) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -811,6 +849,7 @@ const Comments = {
    * @returns Promise
    */
   filter: async (
+    token: string,
     id: number,
     params: CommentFilters,
     callback: (data: TResponse<Comment>) => void,
@@ -818,7 +857,7 @@ const Comments = {
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/articles/${id}/comments/?${Utils.toUrlSearchParams(params)}`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: TResponse<Comment>) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -837,6 +876,7 @@ const Reactions = {
    * @returns Promise
    */
   create: async (
+    token: string,
     id: number,
     reaction: ReactionRequiredFields,
     callback: (data: any) => void,
@@ -844,7 +884,7 @@ const Reactions = {
   ) =>
     await Utils.post(
       `${process.env.NEXT_PUBLIC_API_URL}/articles/${id}/reactions`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       reaction,
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
@@ -858,13 +898,14 @@ const Reactions = {
    * @returns Promise
    */
   delete: async (
+    token: string,
     id: number,
     callback: (data: any) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.delete(
       `${process.env.NEXT_PUBLIC_API_URL}/reactions/${id}`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -877,13 +918,14 @@ const Reactions = {
    * @returns Promise
    */
   get: async (
+    token: string,
     id: number,
     callback: (data: Reaction) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/reactions/${id}`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: Reaction) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -895,12 +937,13 @@ const Reactions = {
    * @returns Promise
    */
   list: async (
+    token: string,
     callback: (data: TResponse<Reaction>) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/reactions`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: TResponse<Reaction>) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -914,6 +957,7 @@ const Reactions = {
    * @returns Promise
    */
   update: async (
+    token: string,
     id: number,
     reaction: ReactionRequiredFields,
     callback: (data: any) => void,
@@ -921,7 +965,7 @@ const Reactions = {
   ) =>
     await Utils.put(
       `${process.env.NEXT_PUBLIC_API_URL}/reactions/${id}`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       reaction,
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
@@ -936,6 +980,7 @@ const Reactions = {
    * @returns Promise
    */
   search: async (
+    token: string,
     id: number,
     query: string,
     callback: (data: TResponse<Reaction>) => void,
@@ -943,7 +988,7 @@ const Reactions = {
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/articles/${id}/reactions/?${Utils.toUrlSearchParams({ search: query })}`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: TResponse<Reaction>) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -957,6 +1002,7 @@ const Reactions = {
    * @returns Promise
    */
   filter: async (
+    token: string,
     id: number,
     params: ReactionFilters,
     callback: (data: TResponse<Reaction>) => void,
@@ -964,7 +1010,7 @@ const Reactions = {
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/articles/${id}/reactions/?${Utils.toUrlSearchParams(params)}`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: TResponse<Reaction>) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -982,13 +1028,14 @@ const Tags = {
    * @returns Promise
    */
   create: async (
+    token: string,
     tag: TagRequiredFields,
     callback: (data: any) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.post(
       `${process.env.NEXT_PUBLIC_API_URL}/tags`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       tag,
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
@@ -1002,13 +1049,14 @@ const Tags = {
    * @returns Promise
    */
   delete: async (
+    token: string,
     id: number,
     callback: (data: any) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.delete(
       `${process.env.NEXT_PUBLIC_API_URL}/tags/${id}`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -1021,13 +1069,14 @@ const Tags = {
    * @returns Promise
    */
   get: async (
+    token: string,
     id: number,
     callback: (data: Tag) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/tags/${id}`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: Tag) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -1039,12 +1088,13 @@ const Tags = {
    * @returns Promise
    */
   list: async (
+    token: string,
     callback: (data: TResponse<Tag>) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/tags`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: TResponse<Tag>) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -1058,6 +1108,7 @@ const Tags = {
    * @returns Promise
    */
   update: async (
+    token: string,
     id: number,
     tag: TagRequiredFields,
     callback: (data: any) => void,
@@ -1065,7 +1116,7 @@ const Tags = {
   ) =>
     await Utils.put(
       `${process.env.NEXT_PUBLIC_API_URL}/tags/${id}`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       tag,
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
@@ -1079,13 +1130,14 @@ const Tags = {
    * @returns Promise
    */
   articles: async (
+    token: string,
     id: number,
     callback: (data: TResponse<Article>) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/tags/${id}/articles`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: TResponse<Article>) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -1098,13 +1150,14 @@ const Tags = {
    * @returns Promise
    */
   search: async (
+    token: string,
     query: string,
     callback: (data: TResponse<Tag>) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/tags?${Utils.toUrlSearchParams({ search: query })}`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: TResponse<Tag>) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -1117,13 +1170,14 @@ const Tags = {
    * @returns Promise
    */
   filter: async (
+    token: string,
     params: TagFilters,
     callback: (data: TResponse<Tag>) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/tags?${Utils.toUrlSearchParams(params)}`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: TResponse<Tag>) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -1141,13 +1195,13 @@ const Users = {
    * @returns Promise
    */
   create: async (
-    user: UserRequiredFields,
+    user: UserRequiredFields & { password: string },
     callback: (data: any) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/users`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/users/`,
+      '',
       user,
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
@@ -1161,13 +1215,14 @@ const Users = {
    * @returns Promise
    */
   delete: async (
+    token: string,
     id: number,
     callback: (data: any) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.delete(
       `${process.env.NEXT_PUBLIC_API_URL}/users/${id}`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -1180,13 +1235,14 @@ const Users = {
    * @returns Promise
    */
   get: async (
+    token: string,
     id: number,
     callback: (data: User) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/users/${id}`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: User) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -1198,12 +1254,13 @@ const Users = {
    * @returns Promise
    */
   list: async (
+    token: string,
     callback: (data: TResponse<User>) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/users`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: TResponse<User>) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -1217,6 +1274,7 @@ const Users = {
    * @returns Promise
    */
   update: async (
+    token: string,
     id: number,
     user: UserRequiredFields,
     callback: (data: any) => void,
@@ -1224,7 +1282,7 @@ const Users = {
   ) =>
     await Utils.put(
       `${process.env.NEXT_PUBLIC_API_URL}/users/${id}`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       user,
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
@@ -1238,13 +1296,14 @@ const Users = {
    * @returns Promise
    */
   articles: async (
+    token: string,
     id: number,
     callback: (data: TResponse<Article>) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/users/${id}/articles`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       (data: TResponse<Article>) => callback(data),
       (error: Error) => errorCallback(error),
     ),
@@ -1257,13 +1316,14 @@ const Users = {
    * @returns Promise
    */
   follow: async (
+    token: string,
     id: number,
     callback: (data: any) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.post(
       `${process.env.NEXT_PUBLIC_API_URL}/users/${id}/follow`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
+      token,
       {},
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
@@ -1277,14 +1337,15 @@ const Users = {
    * @returns Promise
    */
   search: async (
+    token: string,
     query: string,
-    callback: (data: TResponse<Tag>) => void,
+    callback: (data: TResponse<User>) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/users?${Utils.toUrlSearchParams({ search: query })}`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
-      (data: TResponse<Tag>) => callback(data),
+      token,
+      (data: TResponse<User>) => callback(data),
       (error: Error) => errorCallback(error),
     ),
 
@@ -1296,14 +1357,74 @@ const Users = {
    * @returns Promise
    */
   filter: async (
+    token: string,
     params: UserFilters,
-    callback: (data: TResponse<Tag>) => void,
+    callback: (data: TResponse<User>) => void,
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.get(
       `${process.env.NEXT_PUBLIC_API_URL}/users?${Utils.toUrlSearchParams(params)}`,
-      `${process.env.NEXT_PUBLIC_TOKEN}`,
-      (data: TResponse<Tag>) => callback(data),
+      token,
+      (data: TResponse<User>) => callback(data),
+      (error: Error) => errorCallback(error),
+    ),
+
+  /**
+   * Log a user in
+   * @param username Username
+   * @param password User password
+   * @param callback onFullFilled callback
+   * @param errorCallback onRejected callback
+   * @returns Promise
+   */
+  login: async (
+    username: string,
+    password: string,
+    callback: (data: any) => void,
+    errorCallback: (error: Error) => void,
+  ) =>
+    await Utils.post(
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/token/login`,
+      '',
+      { username: username, password: password },
+      (data: any) => callback(data),
+      (error: Error) => errorCallback(error),
+    ),
+
+  /**
+   * Log a user out
+   * @param callback onFullFilled callback
+   * @param errorCallback onRejected callback
+   * @returns Promise
+   */
+  logout: async (
+    token: string,
+    callback: (data: any) => void,
+    errorCallback: (error: Error) => void,
+  ) =>
+    await Utils.post(
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/token/logout`,
+      token,
+      {},
+      (data: any) => callback(data),
+      (error: Error) => errorCallback(error),
+    ),
+
+  /**
+   * Get a user's profile data
+   * @param callback onFullFilled callback
+   * @param errorCallback onRejected callback
+   * @returns Promise
+   */
+  me: async (
+    token: string,
+    callback: (data: any) => void,
+    errorCallback: (error: Error) => void,
+  ) =>
+    await Utils.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/users/me`,
+      token,
+      (data: any) => callback(data),
       (error: Error) => errorCallback(error),
     ),
 }

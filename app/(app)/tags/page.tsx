@@ -1,22 +1,28 @@
 'use client'
 
 import React from 'react'
-import { Response, Tag as TTag } from '@/app/types'
-import { API } from '@/app/utils'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
+import { API } from '@/app/utils'
+import { getAuthToken } from '@/app/actions'
 import { Tag } from '@/app/ui/components'
+import { Response, Tag as TTag } from '@/app/types'
 
 const Page = () => {
   const [query, setQuery] = React.useState('')
   const [tags, setTags] = React.useState<TTag[]>()
 
+  // Fetch the tags
   React.useEffect(() => {
-    ;(async () =>
+    ;(async () => {
+      const cookie = await getAuthToken()
+
       await API.tags.search(
+        cookie,
         query,
         (data: Response<TTag>) => setTags(data.results),
         (error) => console.log(error),
-      ))()
+      )
+    })()
   }, [query])
 
   return (

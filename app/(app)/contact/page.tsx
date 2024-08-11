@@ -13,22 +13,27 @@ const Page = () => (
             </span>
             <span className="sr-only"> - </span>
             <span className="mt-6 block max-w-5xl font-display text-5xl font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-6xl">
-              Let’s work together
+              We{"'"}d Love to Hear from You!
             </span>
           </h1>
           <div className="mt-6 max-w-3xl text-xl text-neutral-600">
-            <p>We can’t wait to hear from you.</p>
+            <p>
+              At CodeConnect, we value your feedback, questions, and
+              suggestions. Whether you need assistance, want to share your
+              thoughts, or have any inquiries, our team is here to help.
+            </p>
           </div>
         </div>
       </div>
     </div>
+
     <div className="mx-auto mt-24 max-w-7xl px-6 sm:mt-32 lg:mt-40 lg:px-8">
       <div className="mx-auto max-w-2xl lg:max-w-none">
         <div className="grid grid-cols-1 gap-x-8 gap-y-24 lg:grid-cols-2">
           <div className="lg:order-last">
             <form>
               <h2 className="font-display text-base font-semibold text-neutral-950">
-                Work inquiries
+                Get in Touch
               </h2>
               <div className="isolate mt-6 -space-y-px rounded-2xl bg-white/50">
                 <div className="group relative z-0 transition-all focus-within:z-10">
@@ -47,6 +52,7 @@ const Page = () => (
                     Name
                   </label>
                 </div>
+
                 <div className="group relative z-0 transition-all focus-within:z-10">
                   <input
                     id=":S2:"
@@ -63,6 +69,7 @@ const Page = () => (
                     Email
                   </label>
                 </div>
+
                 <div className="group relative z-0 transition-all focus-within:z-10">
                   <input
                     id=":S3:"
@@ -79,6 +86,7 @@ const Page = () => (
                     Company
                   </label>
                 </div>
+
                 <div className="group relative z-0 transition-all focus-within:z-10">
                   <input
                     id=":S4:"
@@ -95,6 +103,7 @@ const Page = () => (
                     Phone
                   </label>
                 </div>
+
                 <div className="group relative z-0 transition-all focus-within:z-10">
                   <input
                     id=":S5:"
@@ -110,130 +119,59 @@ const Page = () => (
                     Message
                   </label>
                 </div>
-                <div className="border border-neutral-300 px-6 py-8 first:rounded-t-2xl last:rounded-b-2xl">
-                  <fieldset>
-                    <legend className="text-base/6 text-neutral-500">
-                      Budget
-                    </legend>
-                    <div className="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2">
-                      <label className="flex gap-x-3">
-                        <input
-                          className="h-6 w-6 flex-none appearance-none rounded-full border border-neutral-950/20 outline-none checked:border-[0.5rem] checked:border-neutral-950 focus-visible:ring-1 focus-visible:ring-neutral-950 focus-visible:ring-offset-2"
-                          type="radio"
-                          value="25"
-                          name="budget"
-                        />
-                        <span className="text-base/6 text-neutral-950">
-                          $25K – $50K
-                        </span>
-                      </label>
-                      <label className="flex gap-x-3">
-                        <input
-                          className="h-6 w-6 flex-none appearance-none rounded-full border border-neutral-950/20 outline-none checked:border-[0.5rem] checked:border-neutral-950 focus-visible:ring-1 focus-visible:ring-neutral-950 focus-visible:ring-offset-2"
-                          type="radio"
-                          value="50"
-                          name="budget"
-                        />
-                        <span className="text-base/6 text-neutral-950">
-                          $50K – $100K
-                        </span>
-                      </label>
-                      <label className="flex gap-x-3">
-                        <input
-                          className="h-6 w-6 flex-none appearance-none rounded-full border border-neutral-950/20 outline-none checked:border-[0.5rem] checked:border-neutral-950 focus-visible:ring-1 focus-visible:ring-neutral-950 focus-visible:ring-offset-2"
-                          type="radio"
-                          value="100"
-                          name="budget"
-                        />
-                        <span className="text-base/6 text-neutral-950">
-                          $100K – $150K
-                        </span>
-                      </label>
-                      <label className="flex gap-x-3">
-                        <input
-                          className="h-6 w-6 flex-none appearance-none rounded-full border border-neutral-950/20 outline-none checked:border-[0.5rem] checked:border-neutral-950 focus-visible:ring-1 focus-visible:ring-neutral-950 focus-visible:ring-offset-2"
-                          type="radio"
-                          value="150"
-                          name="budget"
-                        />
-                        <span className="text-base/6 text-neutral-950">
-                          More than $150K
-                        </span>
-                      </label>
-                    </div>
-                  </fieldset>
-                </div>
               </div>
+
               <button
                 className="mt-10 inline-flex rounded-full bg-neutral-950 px-4 py-1.5 text-sm font-semibold text-neutral-50 transition hover:bg-neutral-800"
                 type="submit"
               >
-                <span className="relative top-px">Let’s work together</span>
+                <span className="relative top-px">Submit</span>
               </button>
             </form>
           </div>
+
           <div>
-            <h2 className="font-display text-base font-semibold text-neutral-950">
-              Our offices
-            </h2>
-            <p className="mt-6 text-base text-neutral-600">
-              Prefer doing things in person? We don’t but we have to list our
-              addresses here for legal reasons.
-            </p>
-            <ul
-              role="list"
-              className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2"
-            >
-              <li>
-                <address className="text-sm not-italic text-neutral-600">
-                  <strong className="text-neutral-950">Copenhagen</strong>
-                  <br />1 Carlsberg Gate
-                  <br />
-                  1260, København, Denmark
-                </address>
-              </li>
-              <li>
-                <address className="text-sm not-italic text-neutral-600">
-                  <strong className="text-neutral-950">Billund</strong>
-                  <br />
-                  24 Lego Allé
-                  <br />
-                  7190, Billund, Denmark
-                </address>
-              </li>
-            </ul>
-            <div className="relative mt-16 pt-16 before:absolute before:left-0 before:top-0 before:h-px before:w-6 before:bg-neutral-950 after:absolute after:left-8 after:right-0 after:top-0 after:h-px after:bg-neutral-950/10">
+            <div className="relative">
               <h2 className="font-display text-base font-semibold text-neutral-950">
                 Email us
               </h2>
               <dl className="mt-6 grid grid-cols-1 gap-8 text-sm sm:grid-cols-2">
                 <div>
-                  <dt className="font-semibold text-neutral-950">Careers</dt>
+                  <dt className="font-semibold text-neutral-950">Support</dt>
                   <dd>
                     <a
                       className="text-neutral-600 hover:text-neutral-950"
-                      href="mailto:careers@studioagency.com"
+                      href="mailto:support@codeconnect.com"
                     >
-                      careers@studioagency.com
-                    </a>
-                  </dd>
-                </div>
-                <div>
-                  <dt className="font-semibold text-neutral-950">Press</dt>
-                  <dd>
-                    <a
-                      className="text-neutral-600 hover:text-neutral-950"
-                      href="mailto:press@studioagency.com"
-                    >
-                      press@studioagency.com
+                      support@codeconnect.com
                     </a>
                   </dd>
                 </div>
               </dl>
             </div>
+
+            <div className="relative before:absolute before:left-0 before:top-0 before:h-px before:w-6 before:bg-neutral-950 after:absolute after:left-8 after:right-0 after:top-0 after:h-px after:bg-neutral-950/10">
+              <h2 className="font-display text-base font-semibold text-neutral-950">
+                Phone
+              </h2>
+              <dl className="mt-6 grid grid-cols-1 gap-8 text-sm sm:grid-cols-2">
+                <div>
+                  <dt className="font-semibold text-neutral-950">Call us </dt>
+                  <dd>
+                    <a
+                      className="text-neutral-600 hover:text-neutral-950"
+                      href="tel:+1 (123) 456-7890."
+                    >
+                      +1 (123) 456-7890.
+                    </a>
+                  </dd>
+                </div>
+              </dl>
+            </div>
+
             <div className="relative mt-16 pt-16 before:absolute before:left-0 before:top-0 before:h-px before:w-6 before:bg-neutral-950 after:absolute after:left-8 after:right-0 after:top-0 after:h-px after:bg-neutral-950/10">
               <h2 className="font-display text-base font-semibold text-neutral-950">
-                Follow us
+                Connect with us on our social media channels
               </h2>
               <ul role="list" className="mt-6 flex gap-x-10 text-neutral-950">
                 <li>
@@ -313,6 +251,17 @@ const Page = () => (
                   </a>
                 </li>
               </ul>
+            </div>
+
+            <div className="relative before:absolute before:left-0 before:top-0 before:h-px before:w-6 before:bg-neutral-950 after:absolute after:left-8 after:right-0 after:top-0 after:h-px after:bg-neutral-950/10">
+              <h2 className="font-display text-base font-semibold text-neutral-950">
+                Feedback
+              </h2>
+              <p className="mt-6 text-sm">
+                We are always looking to improve our platform and services. If
+                you have any feedback or suggestions, please fill out our
+                Feedback Form.
+              </p>
             </div>
           </div>
         </div>

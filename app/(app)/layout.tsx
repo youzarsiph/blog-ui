@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
-import Head from 'next/head'
 import '@/app/ui/styles/globals.css'
-import { Footer, Header } from '@/app/ui/components'
-import { Fonts } from '@/app/ui/styles'
+import { Footer, Header } from '@/app/ui'
+import { Fonts } from '@/app/ui'
 
 export const metadata: Metadata = {
-  title: 'BlogFlow',
-  description: 'Get Answers quickly',
+  title: 'CodeConnect',
+  description:
+    'Empowering Developers to Learn, Share, and Grow Together with AI',
 }
 
 const RootLayout = ({
@@ -18,13 +18,6 @@ const RootLayout = ({
     lang="en"
     className={`h-full bg-neutral-950 text-base antialiased ${Fonts.sans.variable} ${Fonts.display.variable} ${Fonts.code.variable}`}
   >
-    <Head>
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@latest/font/bootstrap-icons.min.css"
-      />
-    </Head>
-
     <body className="flex min-h-full flex-col">
       <Header />
 
@@ -32,7 +25,7 @@ const RootLayout = ({
         <div className="relative isolate flex w-full transform-none flex-col pt-9">
           <svg
             aria-hidden="true"
-            className="absolute inset-x-0 -top-14 -z-10 h-[1000px] w-full fill-neutral-50 stroke-neutral-950/5 [mask-image:linear-gradient(to_bottom_left,white_40%,transparent_50%)]"
+            className="absolute inset-x-0 -top-14 -z-[10] h-[1000px] w-full fill-neutral-50 stroke-neutral-950/5 [mask-image:linear-gradient(to_bottom_left,white_40%,transparent_50%)]"
           >
             <rect
               width="100%"

@@ -1,11 +1,12 @@
 'use client'
 
-import { Response, Article as TArticle } from '@/app/types'
-import { Article, Button } from '@/app/ui/components'
-import { API } from '@/app/utils'
 import { MagnifyingGlassIcon, PlusIcon } from '@heroicons/react/24/solid'
 import { useRouter } from 'next/navigation'
 import React from 'react'
+import { API } from '@/app/utils'
+import { getAuthToken } from '@/app/actions'
+import { Article, Button } from '@/app/ui/components'
+import { Response, Article as TArticle } from '@/app/types'
 
 const Page = () => {
   const router = useRouter()
@@ -16,9 +17,12 @@ const Page = () => {
 
   React.useEffect(() => {
     ;(async () => {
+      const cookie = await getAuthToken()
+
       switch (url) {
         case 'feed':
           await API.articles.feed(
+            cookie,
             (data: Response<TArticle>) => setArticles(data.results),
             (error) => console.log(error),
           )
@@ -26,6 +30,7 @@ const Page = () => {
 
         case 'starred':
           await API.articles.starred(
+            cookie,
             (data: Response<TArticle>) => setArticles(data.results),
             (error) => console.log(error),
           )
@@ -33,6 +38,7 @@ const Page = () => {
 
         default:
           await API.articles.list(
+            cookie,
             (data: Response<TArticle>) => setArticles(data.results),
             (error) => console.log(error),
           )

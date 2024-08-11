@@ -3,6 +3,7 @@
 import React from 'react'
 import { Response, User } from '@/app/types'
 import { API } from '@/app/utils'
+import { getAuthToken } from '@/app/actions'
 
 const Page = () => {
   const [users, setUsers] = React.useState<User[]>()
@@ -10,7 +11,10 @@ const Page = () => {
   // Fetch related data
   React.useEffect(() => {
     ;(async () => {
+      const cookie = await getAuthToken()
+
       await API.users.list(
+        cookie,
         (data: Response<User>) => setUsers(data.results),
         (error) => console.error(error),
       )

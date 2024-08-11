@@ -16,13 +16,13 @@ const Input = (props: InputProps & { label: string; description: string }) => (
     <BaseInput
       {...props}
       className={clsx(
-        'block w-full rounded-2xl border border-neutral-300 bg-transparent py-4 pl-6 pr-20 text-base/6 text-neutral-950 ring-4 ring-transparent transition placeholder:text-neutral-500',
+        'block w-full rounded-2xl border border-neutral-300 bg-transparent py-4 pl-6 pr-20 text-neutral-950 ring-4 ring-transparent transition placeholder:text-neutral-500',
         'data-[focus]:border-neutral-950 data-[focus]:outline-none data-[focus]:ring-neutral-950/5 data-[focus]:ring-offset-2',
         props.className,
       )}
     />
 
-    <Description className="text-xs/6 text-neutral-950/50">
+    <Description className="text-xs text-neutral-950/50">
       {props.description}
     </Description>
   </Field>

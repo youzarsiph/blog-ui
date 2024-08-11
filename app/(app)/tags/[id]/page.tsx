@@ -4,15 +4,19 @@ import React from 'react'
 import { Tag } from '@/app/types'
 import { API } from '@/app/utils'
 import Link from 'next/link'
+import { getAuthToken } from '@/app/actions'
 
 const Page = ({ params }: { params: { id: number } }) => {
   const [tag, setTag] = React.useState<Tag>()
   const dateCreated = new Date(tag?.created_at || '').toDateString()
 
-  // Fetch article data
+  // Fetch tag data
   React.useEffect(() => {
     ;(async () => {
+      const cookie = await getAuthToken()
+
       await API.tags.get(
+        cookie,
         params.id,
         (data) => setTag(data),
         (error) => console.error(error),

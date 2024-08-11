@@ -7,6 +7,7 @@ import React from 'react'
 import Button from './Button'
 import { ChevronDoubleRightIcon, StarIcon } from '@heroicons/react/24/solid'
 import { API } from '@/app/utils'
+import { getAuthToken } from '@/app/actions'
 
 const Article = (props: TArticle) => {
   const dateCreated = new Date(props.created_at).toDateString()
@@ -26,7 +27,11 @@ const Article = (props: TArticle) => {
                 <time dateTime={dateCreated}>{dateCreated}</time>
               </dd>
               <dt className="sr-only">Author</dt>
-              <dd className="mt-6 flex gap-x-4">
+              <dd className="relative mt-6 flex gap-x-4">
+                <Link
+                  className="absolute inset-0"
+                  href={`/users/${props.user.id}`}
+                ></Link>
                 <div className="flex-none overflow-hidden rounded-xl bg-neutral-100">
                   <div className="h-16 w-16 object-cover"></div>
                   {/* <Image
@@ -78,13 +83,16 @@ const Article = (props: TArticle) => {
               <Button
                 variant="secondary"
                 aria-label="Mark starred"
-                onClick={() =>
-                  API.articles.star(
+                onClick={async () => {
+                  const cookie = await getAuthToken()
+
+                  await API.articles.star(
+                    cookie,
                     props.id,
                     (data) => console.log(data),
                     (error) => console.error(error),
                   )
-                }
+                }}
               >
                 <StarIcon className="size-6 fill-neutral-950" />
                 <span>{props.stars} stars</span>

@@ -28,7 +28,7 @@ const Dropdown = (
   <Menu>
     <MenuButton
       title={props.label}
-      className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-neutral-950/40 bg-white text-sm/6 font-semibold text-neutral-950 shadow-sm focus:outline-none data-[hover]:bg-neutral-50 data-[focus]:outline-1 data-[focus]:outline-neutral-950/60"
+      className="inline-flex h-8 w-8 items-center justify-center rounded-xl border border-neutral-950/40 bg-white text-sm/6 font-semibold text-neutral-950 shadow-sm focus:outline-none data-[hover]:bg-neutral-50 data-[focus]:outline-1 data-[focus]:outline-neutral-950/60"
       aria-label={props.label}
     >
       <EllipsisHorizontalIcon className="size-6 fill-neutral-950/75" />
@@ -37,7 +37,7 @@ const Dropdown = (
     <MenuItems
       transition
       anchor="bottom start"
-      className="min-w-80shadow mt-2 origin-top-right rounded-3xl border border-neutral-950 bg-white px-4 py-6 text-sm/6 text-neutral-950 shadow-sm ring-4 ring-neutral-950/5 transition duration-100 ease-in-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0 data-[leave]:data-[closed]:opacity-0"
+      className="min-w-80shadow mt-2 origin-top-right rounded-3xl bg-white px-4 py-6 text-sm/6 text-neutral-950 shadow transition duration-100 ease-in-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0 data-[leave]:data-[closed]:opacity-0"
     >
       {props.items.map((item) => (
         <MenuItem key={item.label}>
@@ -45,7 +45,7 @@ const Dropdown = (
             disabled={item.disabled}
             onClick={() => item.onClick()}
             className={clsx(
-              'group flex w-full items-center justify-between gap-4 rounded-lg px-4 py-2 data-[focus]:bg-neutral-100',
+              'group flex w-full items-center justify-between gap-6 rounded-lg px-4 py-2 data-[focus]:bg-neutral-100',
               { 'opacity-50': item.disabled },
             )}
           >

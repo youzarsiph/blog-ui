@@ -4,6 +4,10 @@
 
 @layer base {
   * {
-    @apply font-fira transition-all duration-300 prose-headings:font-display prose-code:font-code;
+    @apply font-fira transition-all duration-300 prose-headings:font-display prose-p:font-fira prose-code:font-code;
+  }
+
+  pre code.hljs {
+    @apply m-0 bg-transparent p-0;
   }
 }

@@ -10,14 +10,7 @@ type Reaction = {
   updated_at: string
 }
 
-enum Emoji {
-  '👍🏻',
-  '❤️',
-  '🤣',
-  '😲',
-  '🤔',
-  '😡',
-}
+type Emoji = '👍🏻' | '❤️' | '🤣' | '😲' | '🤔' | '😡'
 
 type ReactionRequiredFields = Omit<
   Reaction,

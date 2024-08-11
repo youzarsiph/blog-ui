@@ -27,7 +27,7 @@ touch .env.local
 
 Open the file and add the following lines:
 
-```txt
+```bash
 NEXT_PUBLIC_API_URL=http://localhost:8000
 NEXT_PUBLIC_TOKEN=<YOUR_TOKEN>
 ```
