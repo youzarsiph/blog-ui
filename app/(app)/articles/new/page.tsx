@@ -85,7 +85,6 @@ const Page = () => {
           <Input
             label="Article headline"
             value={article.headline}
-            className="font-display"
             description="Enter a compelling headline for your article."
             onChange={(event) =>
               setArticle({ ...article, headline: event.target.value })

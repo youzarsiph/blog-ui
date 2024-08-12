@@ -133,8 +133,10 @@ const Utils = {
    * @returns Promise
    */
   handleResponse: (response: Response) =>
-    response.ok ? response.json() : console.log(response.json()),
-  // :Utils.throwError(response.status, response.statusText),
+    response.ok
+      ? response.json()
+      : Utils.throwError(response.status, response.statusText),
+  // : console.log(response.json()),
 
   /**
    * Get Request headers
@@ -1220,7 +1222,7 @@ const Users = {
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.delete(
-      `${process.env.NEXT_PUBLIC_API_URL}/users/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/users/${id}/`,
       token,
       (data: any) => callback(data),
       (error: Error) => errorCallback(error),
@@ -1280,7 +1282,7 @@ const Users = {
     errorCallback: (error: Error) => void,
   ) =>
     await Utils.put(
-      `${process.env.NEXT_PUBLIC_API_URL}/users/${id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/auth/users/${id}/`,
       token,
       user,
       (data: any) => callback(data),

@@ -66,7 +66,6 @@ const Page = () => {
             type="color"
             label="Tag color"
             value={tag.color}
-            className="font-display"
             description="Enter a unique color for your tag (hexadecimal)."
             onChange={(event) => setTag({ ...tag, color: event.target.value })}
           />
@@ -75,7 +74,6 @@ const Page = () => {
             type="text"
             label="Tag description"
             value={tag.description}
-            className="font-display"
             description="Provide a brief description of the tag. This will help users understand the purpose and relevance of the tag."
             onChange={(event) =>
               setTag({ ...tag, description: event.target.value })

@@ -1,11 +1,11 @@
 'use client'
 
 import React from 'react'
+import Link from 'next/link'
+import { getAuthToken } from '@/app/actions'
 import { User } from '@/app/types'
 import { API } from '@/app/utils'
-import Link from 'next/link'
 import { Button } from '@/app/ui'
-import { getAuthToken } from '@/app/actions'
 
 const Page = ({ params }: { params: { id: number } }) => {
   const [user, setUser] = React.useState<User>()
