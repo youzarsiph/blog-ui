@@ -29,7 +29,6 @@ Open the file and add the following lines:
 
 ```bash
 NEXT_PUBLIC_API_URL=http://localhost:8000
-NEXT_PUBLIC_TOKEN=<YOUR_TOKEN>
 ```
 
 You need to setup the [backend](https://github.com/youzarsiph/blog) for the UI to fetch the data. Make sure to follow the instructions in backend `README.md`.

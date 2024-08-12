@@ -10,7 +10,7 @@ const Page = () => (
       Login
     </h2>
 
-    <div className="isolate grid gap-6 -space-y-px rounded-2xl bg-white/50">
+    <div className="isolate grid gap-6 -space-y-px">
       <Input
         label="Username"
         name="username"

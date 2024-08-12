@@ -1,11 +1,11 @@
 'use client'
 
+import React from 'react'
+import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { getAuthToken } from '@/app/actions'
 import { Response, Article as TArticle } from '@/app/types'
 import { Article } from '@/app/ui/components'
 import { API } from '@/app/utils'
-import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
-import React from 'react'
 
 const Page = () => {
   const [query, setQuery] = React.useState('')
@@ -26,7 +26,12 @@ const Page = () => {
 
   return (
     <>
-      <div className="mx-auto mt-24 max-w-7xl px-6 sm:mt-32 md:mt-56 lg:px-8">
+      <div className="relative mx-auto mt-24 max-w-7xl px-6 sm:mt-32 md:mt-56 lg:px-8">
+        <div className="absolute inset-0 -z-10 -mx-40 -mb-96 -mt-20 backdrop-blur-3xl backdrop-filter lg:-mt-60"></div>
+
+        <div className="absolute right-8 top-8 -z-20 h-96 w-96 rotate-45 rounded-3xl bg-gradient-to-tr from-amber-500 to-orange-500"></div>
+        <div className="absolute bottom-8 left-8 -z-20 h-64 w-64 rotate-45 bg-gradient-to-bl from-sky-400 to-fuchsia-500"></div>
+
         <div className="mx-auto max-w-2xl lg:max-w-none">
           <div className="max-w-3xl">
             <h1 className="font-display text-5xl font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-7xl">

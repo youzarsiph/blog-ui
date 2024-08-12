@@ -37,9 +37,7 @@ import {
 
 const lowlight = createLowlight(all)
 
-const Editor = (
-  props: Partial<EditorOptions & { onChange: (content: string) => void }>,
-) => {
+const Editor = (props: Partial<EditorOptions>) => {
   const editor = useEditor({
     ...props,
     editorProps: {

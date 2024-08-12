@@ -69,18 +69,19 @@ const logout = async () => {
   let reDir = false
   const cookie = await getCookie()
 
-  // Delete the cookie
-  cookies().delete('session')
-
   await API.users.logout(
     `${cookie}`,
-    () => (reDir = true),
+    () => {
+      // Delete the cookie
+      cookies().delete('session')
+
+      reDir = true
+    },
     (error) => console.error(error),
   )
 
-  if (reDir) {
-    return redirect('/login')
-  }
+  cookies().delete('session')
+  return redirect('/login')
 }
 
 /**

@@ -133,9 +133,8 @@ const Utils = {
    * @returns Promise
    */
   handleResponse: (response: Response) =>
-    response.ok
-      ? response.json()
-      : Utils.throwError(response.status, response.statusText),
+    response.ok ? response.json() : console.log(response.json()),
+  // :Utils.throwError(response.status, response.statusText),
 
   /**
    * Get Request headers

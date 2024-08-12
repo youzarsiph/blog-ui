@@ -26,7 +26,12 @@ const Page = ({ params }: { params: { id: number } }) => {
 
   return user !== undefined ? (
     <>
-      <div className="mx-auto mt-24 max-w-7xl px-6 sm:mt-32 md:mt-56 lg:px-8">
+      <div className="relative mx-auto mt-24 max-w-7xl px-6 sm:mt-32 md:mt-56 lg:px-8">
+        <div className="absolute inset-0 -z-10 -mx-40 -mb-80 -mt-20 backdrop-blur-3xl backdrop-filter lg:-mt-60"></div>
+
+        <div className="absolute right-8 top-8 -z-20 h-96 w-96 rotate-45 rounded-3xl bg-gradient-to-tr from-violet-500 to-rose-700"></div>
+        <div className="absolute bottom-8 left-8 -z-20 h-64 w-64 rotate-45 bg-gradient-to-bl from-cyan-400 to-amber-400"></div>
+
         <div className="mx-auto max-w-2xl lg:max-w-none">
           <div className="max-w-3xl">
             <h1 className="font-display text-5xl font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-7xl">
@@ -69,9 +74,15 @@ const Page = ({ params }: { params: { id: number } }) => {
         </div>
       </div>
 
-      {user.articles !== undefined && user.articles.length !== 0 ? (
-        <div className="mx-auto mt-16 max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl lg:max-w-none">
+      <div className="relative mx-auto mt-16 max-w-7xl px-6 lg:px-8">
+        <div className="absolute inset-0 -z-10 -mx-40 -mb-80 -mt-20 backdrop-blur-3xl backdrop-filter"></div>
+
+        <div className="absolute right-64 top-64 -z-20 h-96 w-96 rotate-45 rounded-3xl bg-gradient-to-tr from-indigo-500 to-fuchsia-500"></div>
+        <div className="absolute bottom-96 left-64 -z-20 h-[30rem] w-[30rem] rotate-45 rounded-full bg-gradient-to-bl from-green-400 to-sky-400"></div>
+        <div className="absolute bottom-8 left-8 -z-20 h-64 w-64 rotate-45 bg-gradient-to-bl from-blue-400 to-sky-400"></div>
+
+        <div className="mx-auto max-w-2xl lg:max-w-none">
+          {user.articles !== undefined && user.articles.length !== 0 ? (
             <div className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-2">
               {user.articles.map((art) => {
                 const dateCreated = new Date(art.created_at).toDateString()
@@ -117,11 +128,11 @@ const Page = ({ params }: { params: { id: number } }) => {
                 )
               })}
             </div>
-          </div>
+          ) : (
+            <p>No articles found!</p>
+          )}
         </div>
-      ) : (
-        <p>No articles found!</p>
-      )}
+      </div>
     </>
   ) : (
     <div className="relative flex h-screen w-screen flex-col items-center justify-center gap-16">

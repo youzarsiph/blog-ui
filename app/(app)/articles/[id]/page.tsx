@@ -99,7 +99,7 @@ const Page = ({ params }: { params: { id: number } }) => {
             ></div>
 
             <header className="mx-auto flex max-w-5xl flex-col text-center">
-              <h1 className="font-display text-5xl font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-6xl">
+              <h1 className="mt-6 bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text font-display text-5xl font-medium tracking-tight text-transparent [text-wrap:balance] sm:text-6xl">
                 {article.title}
               </h1>
 
