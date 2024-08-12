@@ -1,13 +1,15 @@
 'use client'
 
 import React from 'react'
-import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
+import { MagnifyingGlassIcon, PlusIcon } from '@heroicons/react/24/solid'
+import { useRouter } from 'next/navigation'
 import { API } from '@/app/utils'
 import { getAuthToken } from '@/app/actions'
-import { Tag } from '@/app/ui/components'
+import { Button, Tag } from '@/app/ui/components'
 import { Response, Tag as TTag } from '@/app/types'
 
 const Page = () => {
+  const router = useRouter()
   const [query, setQuery] = React.useState('')
   const [tags, setTags] = React.useState<TTag[]>()
 
@@ -50,7 +52,7 @@ const Page = () => {
 
       <div className="mx-auto mt-24 max-w-7xl px-6 sm:mt-32 lg:mt-40 lg:px-8">
         <div className="mx-auto max-w-2xl lg:max-w-none">
-          <form>
+          <form className="flex items-center gap-4">
             <div className="relative">
               <input
                 value={query}
@@ -70,6 +72,11 @@ const Page = () => {
                 </button>
               </div>
             </div>
+
+            <Button variant="primary" onClick={() => router.push('/tags/new')}>
+              <PlusIcon className="size-6 fill-neutral-50" />
+              <span>New</span>
+            </Button>
           </form>
 
           <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-3">

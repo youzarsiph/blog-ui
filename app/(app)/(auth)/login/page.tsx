@@ -12,21 +12,19 @@ const Page = () => (
 
     <div className="isolate grid gap-6 -space-y-px">
       <Input
-        label="Username"
-        name="username"
-        description="Your username"
-        placeholder="youzarsiph"
-        type="text"
         required
+        type="text"
+        name="username"
+        label="Username"
+        description="Enter your username"
       />
 
       <Input
-        label="Password"
-        name="password"
-        description="Your password"
-        placeholder="********"
-        type="password"
         required
+        type="password"
+        name="password"
+        label="Password"
+        description="Enter your password"
       />
 
       <Switch

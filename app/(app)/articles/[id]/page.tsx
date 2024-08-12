@@ -5,6 +5,7 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRightIcon } from '@heroicons/react/24/solid'
+import { HeartIcon, StarIcon } from '@heroicons/react/24/solid'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/github-dark.css'
 import { getAuthToken } from '@/app/actions'
@@ -44,7 +45,7 @@ const Page = ({ params }: { params: { id: number } }) => {
     // Highlight the code
     setTimeout(() => {
       hljs.highlightAll()
-    }, 500)
+    }, 1000)
   }, [params.id])
 
   // Fetch related data
@@ -128,6 +129,17 @@ const Page = ({ params }: { params: { id: number } }) => {
                     <span>{(tag as Tag).name}</span>
                   </Link>
                 ))}
+              </div>
+
+              <div className="flex items-center gap-4">
+                <Button variant="primary">
+                  <HeartIcon className="size-6 fill-neutral-50" />
+                  <span>React</span>
+                </Button>
+                <Button variant="primary">
+                  <StarIcon className="size-6 fill-neutral-50" />
+                  <span>Star</span>
+                </Button>
               </div>
             </header>
           </div>

@@ -14,7 +14,6 @@ const Page = async () => (
         type="text"
         name="username"
         label="Username"
-        placeholder="Username"
         description="Enter your username"
       />
 
@@ -23,8 +22,7 @@ const Page = async () => (
         type="email"
         name="email"
         label="Email address"
-        placeholder="Email address"
-        description="Enter your email"
+        description="Enter your email address"
       />
 
       <Input
@@ -32,7 +30,6 @@ const Page = async () => (
         type="password"
         name="password"
         label="Password"
-        placeholder="********"
         description="Enter your password"
       />
     </div>
