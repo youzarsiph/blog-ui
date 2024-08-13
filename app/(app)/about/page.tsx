@@ -6,10 +6,8 @@ import Image from 'next/image'
 const Page = () => (
   <>
     <div className="relative mx-auto mt-24 max-w-7xl px-6 sm:mt-32 lg:mt-40 lg:px-8">
-      <div className="absolute inset-0 -z-10 -mx-40 -mb-80 -mt-20 backdrop-blur-3xl backdrop-filter lg:-mt-40"></div>
-
-      <div className="absolute right-8 top-8 -z-20 h-96 w-96 rotate-45 rounded-3xl bg-gradient-to-tr from-blue-300 to-blue-500"></div>
-      <div className="absolute bottom-8 left-8 -z-20 h-64 w-64 rotate-45 bg-gradient-to-bl from-green-400 to-sky-500"></div>
+      <div className="absolute right-8 top-8 -z-20 h-96 w-96 rotate-45 rounded-3xl bg-gradient-to-tr from-blue-300 to-blue-500 blur-3xl filter"></div>
+      <div className="absolute bottom-8 left-8 -z-20 h-64 w-64 rotate-45 bg-gradient-to-bl from-green-400 to-sky-500 blur-3xl filter"></div>
 
       <div className="mx-auto max-w-2xl lg:max-w-none">
         <div>
@@ -85,7 +83,7 @@ const Page = () => (
                   <div className="relative pl-8 before:absolute before:left-0 before:top-0 before:h-6 before:w-px before:bg-white after:absolute after:bottom-0 after:left-0 after:top-8 after:w-px after:bg-white/10">
                     <strong className="font-semibold text-neutral-50">
                       Extensive Resources.
-                    </strong>
+                    </strong>{' '}
                     Access a vast library of tutorials, articles, and resources
                     curated by experts in the field. Stay updated with the
                     latest trends and technologies to keep your skills sharp.
@@ -97,7 +95,7 @@ const Page = () => (
                   <div className="relative pl-8 before:absolute before:left-0 before:top-0 before:h-6 before:w-px before:bg-white after:absolute after:bottom-0 after:left-0 after:top-8 after:w-px after:bg-white/10">
                     <strong className="font-semibold text-neutral-50">
                       Networking Opportunities.
-                    </strong>
+                    </strong>{' '}
                     Connect with like-minded individuals, follow your favorite
                     contributors, and build your professional profile. Our
                     AI-powered networking suggestions help you find and connect
@@ -131,10 +129,8 @@ const Page = () => (
     </div>
 
     <div className="relative mx-auto mt-24 max-w-7xl px-6 sm:mt-32 lg:mt-40 lg:px-8">
-      <div className="absolute inset-0 -z-10 -mx-40 -mb-80 -mt-20 backdrop-blur-3xl backdrop-filter lg:-mt-40"></div>
-
-      <div className="absolute bottom-8 left-8 -z-20 h-96 w-96 rotate-45 rounded-3xl bg-gradient-to-tr from-yellow-300 to-orange-500"></div>
-      <div className="absolute right-8 top-8 -z-20 h-64 w-64 rotate-45 bg-gradient-to-bl from-purple-400 to-sky-500"></div>
+      <div className="absolute bottom-8 left-8 -z-20 h-96 w-96 rotate-45 rounded-3xl bg-gradient-to-tr from-yellow-300 to-orange-500 blur-3xl filter"></div>
+      <div className="absolute right-8 top-8 -z-20 h-64 w-64 rotate-45 bg-gradient-to-bl from-purple-400 to-sky-500 blur-3xl filter"></div>
 
       <div className="mx-auto max-w-2xl lg:max-w-none">
         <div className="space-y-24">
@@ -161,8 +157,8 @@ const Page = () => (
                           height="1800"
                           decoding="async"
                           data-nimg="1"
-                          className="h-96 w-full object-cover grayscale transition duration-500 motion-safe:group-hover:scale-105"
-                          src="/About Us - Studio_files/leslie-alexander.jpg"
+                          className="h-96 w-full object-contain grayscale transition duration-500 motion-safe:group-hover:scale-105"
+                          src="/next.svg"
                           style={{ color: 'transparent' }}
                         />
                         <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black to-black/0 to-40% p-6">
@@ -186,8 +182,8 @@ const Page = () => (
                           height="1800"
                           decoding="async"
                           data-nimg="1"
-                          className="h-96 w-full object-cover grayscale transition duration-500 motion-safe:group-hover:scale-105"
-                          src="/About Us - Studio_files/michael-foster.jpg"
+                          className="h-96 w-full object-fill grayscale transition duration-500 motion-safe:group-hover:scale-105"
+                          src="/vercel.svg"
                           style={{ color: 'transparent' }}
                         />
                         <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black to-black/0 to-40% p-6">
@@ -211,8 +207,8 @@ const Page = () => (
                           height="1800"
                           decoding="async"
                           data-nimg="1"
-                          className="h-96 w-full object-cover grayscale transition duration-500 motion-safe:group-hover:scale-105"
-                          src="/About Us - Studio_files/dries-vincent.jpg"
+                          className="h-96 w-full object-fill grayscale transition duration-500 motion-safe:group-hover:scale-105"
+                          src="/vercel.svg"
                           style={{ color: 'transparent' }}
                         />
                         <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black to-black/0 to-40% p-6">

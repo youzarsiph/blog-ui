@@ -30,11 +30,7 @@ const Page = () => {
               Users
             </h1>
 
-            <p className="mt-6 text-xl text-neutral-600">
-              We are a development studio working at the intersection of design
-              and technology. It’s a really busy intersection though — a lot of
-              our staff have been involved in hit and runs.
-            </p>
+            <p className="mt-6 text-xl text-neutral-600"></p>
           </div>
         </div>
       </div>

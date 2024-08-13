@@ -8,7 +8,7 @@ const Page = async () => (
       Sign up
     </h2>
 
-    <div className="isolate grid gap-6 -space-y-px rounded-2xl bg-white/50">
+    <div className="isolate grid gap-6 -space-y-px">
       <Input
         required
         type="text"

@@ -61,11 +61,9 @@ const Page = ({ params }: { params: { id: number } }) => {
       <article className="mx-auto mt-24 max-w-7xl px-6 sm:mt-32 lg:mt-40 lg:px-8">
         <div className="mx-auto max-w-2xl lg:max-w-none">
           <div className="relative">
-            <div className="absolute inset-0 -z-10 -mx-40 -mb-80 -mt-20 backdrop-blur-3xl backdrop-filter lg:-mt-32"></div>
-
             <div
               className={clsx(
-                'absolute left-8 top-4 -z-20 h-96 w-96 rounded-full bg-gradient-to-l',
+                'absolute left-8 top-4 -z-20 h-96 w-96 rounded-full bg-gradient-to-l blur-3xl filter',
                 {
                   'from-sky-400 to-blue-600': article.id % 2 === 0,
                   'from-cyan-400 to-purple-500': article.id % 2 !== 0,
@@ -74,7 +72,7 @@ const Page = ({ params }: { params: { id: number } }) => {
             ></div>
             <div
               className={clsx(
-                'absolute bottom-4 right-8 -z-20 h-56 w-80 rounded-3xl bg-gradient-to-tr',
+                'absolute bottom-4 right-8 -z-20 h-56 w-80 rounded-3xl bg-gradient-to-tr blur-3xl filter',
                 {
                   'from-sky-500 to-fuchsia-600': article.id % 2 === 0,
                   'from-sky-400 to-emerald-400': article.id % 2 !== 0,

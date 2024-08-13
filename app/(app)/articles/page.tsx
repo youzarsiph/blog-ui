@@ -50,10 +50,8 @@ const Page = () => {
   return (
     <>
       <div className="relative mx-auto mt-24 max-w-7xl px-6 sm:mt-32 lg:mt-40 lg:px-8">
-        <div className="absolute inset-0 -z-10 -mx-40 -mb-96 -mt-20 backdrop-blur-3xl backdrop-filter lg:-mt-40"></div>
-
-        <div className="absolute right-8 top-8 -z-20 h-96 w-96 rotate-45 rounded-3xl bg-gradient-to-tr from-red-300 to-rose-500"></div>
-        <div className="absolute bottom-8 left-8 -z-20 h-64 w-64 rotate-45 bg-gradient-to-bl from-sky-400 to-lime-500"></div>
+        <div className="absolute right-8 top-8 -z-20 h-96 w-96 rotate-45 rounded-3xl bg-gradient-to-tr from-red-300 to-rose-500 blur-3xl filter"></div>
+        <div className="absolute bottom-8 left-8 -z-20 h-64 w-64 rotate-45 bg-gradient-to-bl from-sky-400 to-lime-500 blur-3xl filter"></div>
 
         <div className="mx-auto max-w-2xl lg:max-w-none">
           <div>
@@ -128,9 +126,25 @@ const Page = () => {
           </div>
 
           <div className="mt-6 space-y-24 lg:space-y-32">
-            {articles?.map((article) => (
-              <Article key={article.id} {...article} />
-            ))}
+            {articles ? (
+              articles.length !== 0 ? (
+                articles.map((article) => (
+                  <Article key={article.id} {...article} />
+                ))
+              ) : (
+                <p>No article found!</p>
+              )
+            ) : (
+              <div className="relative flex flex-col items-center justify-center gap-16 py-16">
+                <h1 className="text-3xl">Loading...</h1>
+
+                <div className="flex items-center gap-8">
+                  <div className="flex h-12 w-12 animate-ping items-center justify-center rounded-full border-2 border-neutral-800"></div>
+                  <div className="flex h-12 w-12 animate-ping items-center justify-center rounded-full border-2 border-neutral-800"></div>
+                  <div className="flex h-12 w-12 animate-ping items-center justify-center rounded-full border-2 border-neutral-800"></div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

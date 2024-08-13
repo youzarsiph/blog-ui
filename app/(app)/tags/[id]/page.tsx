@@ -5,6 +5,7 @@ import { Tag } from '@/app/types'
 import { API } from '@/app/utils'
 import Link from 'next/link'
 import { getAuthToken } from '@/app/actions'
+import { ArrowLongRightIcon } from '@heroicons/react/24/solid'
 
 const Page = ({ params }: { params: { id: number } }) => {
   const [tag, setTag] = React.useState<Tag>()
@@ -27,10 +28,8 @@ const Page = ({ params }: { params: { id: number } }) => {
   return tag !== undefined ? (
     <>
       <article className="relative mx-auto mt-24 max-w-7xl px-6 sm:mt-32 lg:mt-40 lg:px-8">
-        <div className="absolute inset-0 -z-10 -mx-40 -mb-80 -mt-20 backdrop-blur-3xl backdrop-filter lg:-mt-40"></div>
-
-        <div className="absolute right-8 top-8 -z-20 h-64 w-64 rotate-45 rounded-3xl bg-gradient-to-tr from-red-300 to-red-700"></div>
-        <div className="absolute bottom-8 left-8 -z-20 h-48 w-48 rotate-45 bg-gradient-to-bl from-sky-200 to-lime-500"></div>
+        <div className="absolute right-8 top-8 -z-20 h-64 w-64 rotate-45 rounded-3xl bg-gradient-to-tr from-red-300 to-red-700 blur-3xl filter"></div>
+        <div className="absolute bottom-8 left-8 -z-20 h-48 w-48 rotate-45 bg-gradient-to-bl from-sky-200 to-lime-500 blur-3xl filter"></div>
 
         <div className="mx-auto max-w-2xl lg:max-w-none">
           <div>
@@ -91,22 +90,11 @@ const Page = ({ params }: { params: { id: number } }) => {
                             {art.headline}
                           </p>
                           <Link
-                            className="mt-6 flex gap-x-3 text-base font-semibold text-neutral-950 transition hover:text-neutral-700"
-                            aria-label="Read more: 3 Lessons We Learned Going Back to the Office"
+                            className="mt-6 flex items-center gap-x-3 text-base font-semibold text-neutral-950 transition hover:text-neutral-700"
                             href={`/articles/${art.id}`}
                           >
                             Read more
-                            <svg
-                              viewBox="0 0 24 6"
-                              aria-hidden="true"
-                              className="w-6 flex-none fill-current"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                clipRule="evenodd"
-                                d="M24 3 18 .5v2H0v1h18v2L24 3Z"
-                              ></path>
-                            </svg>
+                            <ArrowLongRightIcon className="size-6 fill-neutral-950" />
                             <span className="absolute inset-0"></span>
                           </Link>
                         </div>

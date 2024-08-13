@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { getAuthToken } from '@/app/actions'
 import { Tag } from '@/app/types'
 import { API } from '@/app/utils'
-import { Button, Input } from '@/app/ui'
+import { Button } from '@/app/ui'
 
 const Page = ({ params }: { params: { id: number } }) => {
   const router = useRouter()
@@ -25,17 +25,18 @@ const Page = ({ params }: { params: { id: number } }) => {
     })()
   }, [params.id])
 
-  const handleUpdate = async () => {
+  const handleDelete = async () => {
     const cookie = await getAuthToken()
 
     if (tag) {
-      await API.tags.update(
+      await API.tags.delete(
         cookie,
         tag.id,
-        tag,
-        (data) => router.push(`/tags/${data.id}`),
+        () => router.push('/tags'),
         (error) => console.error(error),
       )
+
+      router.push('/tags')
     }
   }
 
@@ -49,56 +50,19 @@ const Page = ({ params }: { params: { id: number } }) => {
           <header className="mx-auto flex max-w-5xl flex-col space-y-6">
             <div className="max-w-3xl">
               <h1 className="font-display text-5xl font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-7xl">
-                Update tag{' '}
+                Delete tag{' '}
                 <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text font-extrabold tracking-widest text-transparent">
                   {tag.name}
                 </span>
               </h1>
 
               <div className="mt-6 max-w-3xl text-xl text-neutral-600">
-                <p>
-                  Organize and Discover Content with Tags. Tags help categorize
-                  and organize content on our platform, making it easier for
-                  users to find articles and discussions related to specific
-                  topics. Follow the steps below to create a new tag.
-                </p>
+                <p>Are you sure you want to delete this tag?</p>
               </div>
             </div>
 
-            <Input
-              type="text"
-              label="Tag name"
-              value={tag.name}
-              className="font-display"
-              description="Enter a unique and descriptive name for your tag."
-              onChange={(event) => setTag({ ...tag, name: event.target.value })}
-            />
-
-            <Input
-              type="color"
-              label="Tag color"
-              value={tag.color}
-              description="Enter a unique color for your tag (hexadecimal)."
-              onChange={(event) =>
-                setTag({ ...tag, color: event.target.value })
-              }
-            />
-
-            <Input
-              type="text"
-              label="Tag description"
-              value={tag.description}
-              description="Provide a brief description of the tag. This will help users understand the purpose and relevance of the tag."
-              onChange={(event) =>
-                setTag({ ...tag, description: event.target.value })
-              }
-            />
-
-            <Button
-              variant="primary"
-              onClick={async () => await handleUpdate()}
-            >
-              Save
+            <Button variant="danger" onClick={async () => await handleDelete()}>
+              Delete
             </Button>
           </header>
         </div>

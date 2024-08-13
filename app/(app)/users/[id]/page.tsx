@@ -6,6 +6,7 @@ import { getAuthToken } from '@/app/actions'
 import { User } from '@/app/types'
 import { API } from '@/app/utils'
 import { Button } from '@/app/ui'
+import { ArrowLongRightIcon } from '@heroicons/react/24/solid'
 
 const Page = ({ params }: { params: { id: number } }) => {
   const [user, setUser] = React.useState<User>()
@@ -27,16 +28,17 @@ const Page = ({ params }: { params: { id: number } }) => {
   return user !== undefined ? (
     <>
       <div className="relative mx-auto mt-24 max-w-7xl px-6 sm:mt-32 md:mt-56 lg:px-8">
-        <div className="absolute inset-0 -z-10 -mx-40 -mb-80 -mt-20 backdrop-blur-3xl backdrop-filter lg:-mt-60"></div>
-
-        <div className="absolute right-8 top-8 -z-20 h-96 w-96 rotate-45 rounded-3xl bg-gradient-to-tr from-violet-500 to-rose-700"></div>
-        <div className="absolute bottom-8 left-8 -z-20 h-64 w-64 rotate-45 bg-gradient-to-bl from-cyan-400 to-amber-400"></div>
+        <div className="absolute right-8 top-8 -z-20 h-96 w-96 rotate-45 rounded-3xl bg-gradient-to-tr from-violet-500 to-rose-700 blur-3xl filter"></div>
+        <div className="absolute bottom-8 left-8 -z-20 h-64 w-64 rotate-45 bg-gradient-to-bl from-cyan-400 to-amber-400 blur-3xl filter"></div>
 
         <div className="mx-auto max-w-2xl lg:max-w-none">
           <div className="max-w-3xl">
             <h1 className="font-display text-5xl font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-7xl">
               {user.first_name} {user.last_name}
             </h1>
+            <h2 className="font-display text-2xl sm:text-5xl">
+              {user.username}
+            </h2>
 
             <p className="mt-6 text-xl text-neutral-600">{user.bio}</p>
 
@@ -75,11 +77,9 @@ const Page = ({ params }: { params: { id: number } }) => {
       </div>
 
       <div className="relative mx-auto mt-16 max-w-7xl px-6 lg:px-8">
-        <div className="absolute inset-0 -z-10 -mx-40 -mb-80 -mt-20 backdrop-blur-3xl backdrop-filter"></div>
-
-        <div className="absolute right-64 top-64 -z-20 h-96 w-96 rotate-45 rounded-3xl bg-gradient-to-tr from-indigo-500 to-fuchsia-500"></div>
-        <div className="absolute bottom-96 left-64 -z-20 h-[30rem] w-[30rem] rotate-45 rounded-full bg-gradient-to-bl from-green-400 to-sky-400"></div>
-        <div className="absolute bottom-8 left-8 -z-20 h-64 w-64 rotate-45 bg-gradient-to-bl from-blue-400 to-sky-400"></div>
+        <div className="absolute right-64 top-64 -z-20 h-96 w-96 rotate-45 rounded-3xl bg-gradient-to-tr from-indigo-500 to-fuchsia-500 blur-3xl filter"></div>
+        <div className="absolute bottom-96 left-64 -z-20 h-[30rem] w-[30rem] rotate-45 rounded-full bg-gradient-to-bl from-green-400 to-sky-400 blur-3xl filter"></div>
+        <div className="absolute bottom-8 left-8 -z-20 h-64 w-64 rotate-45 bg-gradient-to-bl from-blue-400 to-sky-400 blur-3xl filter"></div>
 
         <div className="mx-auto max-w-2xl lg:max-w-none">
           {user.articles !== undefined && user.articles.length !== 0 ? (
@@ -105,21 +105,10 @@ const Page = ({ params }: { params: { id: number } }) => {
                         </p>
                         <Link
                           className="mt-6 flex gap-x-3 text-base font-semibold text-neutral-950 transition hover:text-neutral-700"
-                          aria-label="Read more: 3 Lessons We Learned Going Back to the Office"
                           href={`/articles/${art.id}`}
                         >
                           Read more
-                          <svg
-                            viewBox="0 0 24 6"
-                            aria-hidden="true"
-                            className="w-6 flex-none fill-current"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              clipRule="evenodd"
-                              d="M24 3 18 .5v2H0v1h18v2L24 3Z"
-                            ></path>
-                          </svg>
+                          <ArrowLongRightIcon className="size-6 fill-neutral-950" />
                           <span className="absolute inset-0"></span>
                         </Link>
                       </div>

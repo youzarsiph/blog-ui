@@ -4,7 +4,7 @@ import React from 'react'
 import { getAuthToken } from '@/app/actions'
 import { User } from '@/app/types'
 import { API } from '@/app/utils'
-import { Button, Input, Textarea } from '@/app/ui'
+import { Button } from '@/app/ui'
 import { useRouter } from 'next/navigation'
 
 const Page = ({ params }: { params: { id: number } }) => {
@@ -16,7 +16,7 @@ const Page = ({ params }: { params: { id: number } }) => {
     ;(async () => {
       const cookie = await getAuthToken()
 
-      await API.users.get(
+      await API.users.delete(
         cookie,
         params.id,
         (data) => setUser(data),
@@ -25,17 +25,17 @@ const Page = ({ params }: { params: { id: number } }) => {
     })()
   }, [params.id])
 
-  const handleUpdate = async () => {
+  const handleDelete = async () => {
     const cookie = await getAuthToken()
 
     if (user) {
-      await API.users.update(
+      await API.users.delete(
         cookie,
         user.id,
-        user,
-        (data) => router.push(`/users/${data.id}`),
+        () => router.push(`/`),
         (error) => console.error(error),
       )
+      router.push(`/`)
     }
   }
 
@@ -47,48 +47,18 @@ const Page = ({ params }: { params: { id: number } }) => {
 
         <div className="mx-auto max-w-2xl lg:max-w-none">
           <h1 className="mb-10 font-display text-5xl font-medium tracking-tight text-neutral-950 [text-wrap:balance] sm:text-7xl">
-            Update your account{' '}
+            Delete your account{' '}
             <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text font-extrabold tracking-widest text-transparent">
               {user.username}
             </span>
           </h1>
 
-          <Input
-            label="First name"
-            value={user.first_name}
-            description="Enter your first name."
-            onChange={(event) =>
-              setUser({ ...user, first_name: event.target.value })
-            }
-          />
+          <div className="mt-6 max-w-3xl text-xl text-neutral-600">
+            <p>Are you sure you want to delete your account?</p>
+          </div>
 
-          <Input
-            label="Last name"
-            value={user.last_name}
-            description="Enter your last name."
-            onChange={(event) =>
-              setUser({ ...user, last_name: event.target.value })
-            }
-          />
-
-          <Input
-            label="Email"
-            value={user.email}
-            description="Enter your email."
-            onChange={(event) =>
-              setUser({ ...user, email: event.target.value })
-            }
-          />
-
-          <Textarea
-            label="Bio"
-            value={user.bio}
-            description="Enter your bio."
-            onChange={(event) => setUser({ ...user, bio: event.target.value })}
-          />
-
-          <Button variant="primary" className="mt-6" onClick={handleUpdate}>
-            Save changes
+          <Button variant="danger" className="mt-6" onClick={handleDelete}>
+            Delete
           </Button>
         </div>
       </div>

@@ -4,8 +4,12 @@ import clsx from 'clsx'
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRightIcon } from '@heroicons/react/24/solid'
-import { HeartIcon, StarIcon } from '@heroicons/react/24/solid'
+import {
+  ArrowLongRightIcon,
+  ArrowRightIcon,
+  HeartIcon,
+  StarIcon,
+} from '@heroicons/react/24/solid'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/github-dark.css'
 import { getAuthToken } from '@/app/actions'
@@ -41,17 +45,17 @@ const Page = ({ params }: { params: { id: number } }) => {
         (error) => console.error(error),
       )
     })()
-
-    // Highlight the code
-    setTimeout(() => {
-      hljs.highlightAll()
-    }, 1000)
   }, [params.id])
 
   // Fetch related data
   React.useEffect(() => {
     ;(async () => {
       if (article) {
+        // Highlight the code
+        setTimeout(() => {
+          hljs.highlightAll()
+        }, 500)
+
         const cookie = await getAuthToken()
 
         await API.articles.comments(
@@ -78,11 +82,9 @@ const Page = ({ params }: { params: { id: number } }) => {
       <article className="mx-auto mt-24 max-w-7xl px-6 sm:mt-32 lg:mt-40 lg:px-8">
         <div className="mx-auto max-w-2xl lg:max-w-none">
           <div className="relative">
-            <div className="absolute inset-0 -z-10 -mx-40 -mb-80 -mt-20 backdrop-blur-3xl backdrop-filter lg:-mt-32"></div>
-
             <div
               className={clsx(
-                'absolute left-8 top-4 -z-20 h-96 w-96 rounded-full bg-gradient-to-l',
+                'absolute left-8 top-4 -z-20 h-96 w-96 rounded-full bg-gradient-to-l blur-3xl filter',
                 {
                   'from-sky-400 to-blue-600': article.id % 2 === 0,
                   'from-cyan-400 to-purple-500': article.id % 2 !== 0,
@@ -91,7 +93,7 @@ const Page = ({ params }: { params: { id: number } }) => {
             ></div>
             <div
               className={clsx(
-                'absolute bottom-4 right-8 -z-20 h-56 w-80 rounded-3xl bg-gradient-to-tr',
+                'absolute bottom-4 right-8 -z-20 h-56 w-80 rounded-3xl bg-gradient-to-tr blur-3xl filter',
                 {
                   'from-sky-500 to-fuchsia-600': article.id % 2 === 0,
                   'from-sky-400 to-emerald-400': article.id % 2 !== 0,
@@ -99,7 +101,54 @@ const Page = ({ params }: { params: { id: number } }) => {
               )}
             ></div>
 
-            <header className="mx-auto flex max-w-5xl flex-col text-center">
+            <div className="absolute left-0 top-4 z-10 grid gap-4 rounded-full bg-white p-4 shadow">
+              <div className="flex flex-col items-center gap-1">
+                <button
+                  onClick={async () => {
+                    const cookie = await getAuthToken()
+
+                    await API.articles.react(
+                      cookie,
+                      article.id,
+                      { emoji: '❤️' },
+                      () => {},
+                      (error) => console.error(error),
+                    )
+                  }}
+                  className="flex h-8 w-8 items-center justify-center rounded-full hover:bg-neutral-100"
+                  title="React"
+                >
+                  <HeartIcon className="size-6 fill-rose-500" />
+                </button>
+                <span className="text-xs text-neutral-500">
+                  {article.reaction_count}
+                </span>
+              </div>
+
+              <div className="flex flex-col items-center gap-1">
+                <button
+                  onClick={async () => {
+                    const cookie = await getAuthToken()
+
+                    await API.articles.star(
+                      cookie,
+                      article.id,
+                      () => {},
+                      (error) => console.error(error),
+                    )
+                  }}
+                  className="flex h-8 w-8 items-center justify-center rounded-full hover:bg-neutral-100"
+                  title="Star"
+                >
+                  <StarIcon className="size-6 fill-yellow-400" />
+                </button>
+                <span className="text-xs text-neutral-500">
+                  {article.stars}
+                </span>
+              </div>
+            </div>
+
+            <header className="relative mx-auto flex max-w-5xl flex-col text-center">
               <h1 className="mt-6 bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text font-display text-5xl font-medium tracking-tight text-transparent [text-wrap:balance] sm:text-6xl">
                 {article.title}
               </h1>
@@ -130,17 +179,6 @@ const Page = ({ params }: { params: { id: number } }) => {
                   </Link>
                 ))}
               </div>
-
-              <div className="flex items-center gap-4">
-                <Button variant="primary">
-                  <HeartIcon className="size-6 fill-neutral-50" />
-                  <span>React</span>
-                </Button>
-                <Button variant="primary">
-                  <StarIcon className="size-6 fill-neutral-50" />
-                  <span>Star</span>
-                </Button>
-              </div>
             </header>
           </div>
 
@@ -151,18 +189,6 @@ const Page = ({ params }: { params: { id: number } }) => {
                   <div className="group isolate my-10 mb-6 overflow-hidden rounded-[2.5rem] bg-neutral-100 max-sm:-mx-6">
                     <div className="group relative">
                       <div className="aspect-[16/10] h-[1600] w-[2400] max-w-full bg-neutral-200 object-cover"></div>
-                      {/* <Image
-                      alt=""
-                      loading="lazy"
-                      width="2400"
-                      height="1600"
-                      decoding="async"
-                      data-nimg="1"
-                      className="aspect-[16/10] w-full object-cover"
-                      sizes="(min-width: 768px) 42rem, 100vw"
-                      src="./The Future of Web Development_ Our Predictions for 2023 - Studio_files/server.jpg"
-                      style={{ color: 'transparent', filter: 'grayscale(1)' }}
-                    /> */}
                     </div>
                   </div>
                 ) : undefined}
@@ -247,15 +273,13 @@ const Page = ({ params }: { params: { id: number } }) => {
 
       <section
         id="details"
-        className="relative mt-24 overflow-hidden rounded-t-[2.5rem] py-24 sm:mt-32 sm:pt-32 lg:mt-40 lg:pt-40"
+        className="relative mt-24 rounded-t-[2.5rem] py-24 sm:mt-32 sm:pt-32 lg:mt-40 lg:pt-40"
       >
-        <div className="absolute inset-0 -z-10 -mx-40 -mb-80 -mt-20 backdrop-blur-3xl backdrop-filter lg:-mt-32"></div>
+        <div className="absolute right-24 top-20 -z-20 h-[30rem] w-[30rem] rotate-45 rounded-3xl bg-gradient-to-t from-cyan-400 to-green-500 blur-3xl filter"></div>
+        <div className="absolute bottom-10 left-24 -z-20 h-96 w-96 bg-gradient-to-bl from-orange-400 to-purple-500 blur-3xl filter"></div>
 
-        <div className="absolute right-24 top-20 -z-20 h-[30rem] w-[30rem] rotate-45 rounded-3xl bg-gradient-to-t from-cyan-400 to-green-500"></div>
-        <div className="absolute bottom-10 left-24 -z-20 h-96 w-96 bg-gradient-to-bl from-orange-400 to-purple-500"></div>
-
-        <div className="absolute left-40 top-8 -z-20 h-80 w-80 -rotate-45 bg-gradient-to-bl from-blue-700 to-violet-500"></div>
-        <div className="absolute bottom-40 right-24 -z-20 h-96 w-96 rotate-45 bg-gradient-to-bl from-lime-400 to-green-700"></div>
+        <div className="absolute left-40 top-8 -z-20 h-80 w-80 -rotate-45 bg-gradient-to-bl from-blue-700 to-violet-500 blur-3xl filter"></div>
+        <div className="absolute bottom-40 right-24 -z-20 h-96 w-96 rotate-45 bg-gradient-to-bl from-lime-400 to-green-700 blur-3xl filter"></div>
 
         {/* Comments */}
         <section id="comments">
@@ -365,21 +389,10 @@ const Page = ({ params }: { params: { id: number } }) => {
                             </p>
                             <Link
                               className="mt-6 flex gap-x-3 text-base font-semibold text-neutral-950 transition hover:text-neutral-700"
-                              aria-label="Read more: 3 Lessons We Learned Going Back to the Office"
                               href={`/articles/${(art as Article).id}`}
                             >
                               Read more
-                              <svg
-                                viewBox="0 0 24 6"
-                                aria-hidden="true"
-                                className="w-6 flex-none fill-current"
-                              >
-                                <path
-                                  fillRule="evenodd"
-                                  clipRule="evenodd"
-                                  d="M24 3 18 .5v2H0v1h18v2L24 3Z"
-                                ></path>
-                              </svg>
+                              <ArrowLongRightIcon className="size-6 fill-neutral-950" />
                               <span className="absolute inset-0"></span>
                             </Link>
                           </div>
